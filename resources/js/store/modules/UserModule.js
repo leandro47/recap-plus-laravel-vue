@@ -3,15 +3,15 @@ import axios from 'axios'
 export default {
     state: {
         user: {},
-        errors: []
+        errors: {data: null, status: null}
     },
     getters: {
         fetchUserError (state) {return state.errors},
         fetchUser (state) {return state.user},
     },
     mutations: {
-        setErrors: (state, errors) => state.errors.push(errors),
-        clearErrors: (state) => state.errors = [],
+        setErrors: (state, errors) => state.errors = errors,
+        clearErrors: (state) => state.errors = {data: null, status: null},
         fetchUser: (state, user) => state.user = user,
         clearUser: (state) => state.user = {},
     },
@@ -20,27 +20,27 @@ export default {
             await axios.get("/api/user")
                 .then((user) => {
                     commit("fetchUser", user.data);
-                })
-                .catch((error) => {
-                    commit("setErrors", error.response);
                 });
         },
         async authUser({ commit }, dataObject) {
+            commit("clearErrors");
+
             await axios.post("/api/login", dataObject)
                 .then((user) => {
                     commit("fetchUser", user.data);
-                    commit("clearErrors");
                 })
                 .catch((error) => {
-                    commit("setErrors", error.response);
+                    commit("setErrors", error.response.data);
                 });
         },
         async logoutUser({commit}) {
+            commit("clearErrors");
+
             await axios.post('/api/logout').then(()=>{
                 commit("clearUser");
             })
             .catch((error) => {
-                commit("setErrors", error.response);
+                commit("setErrors", error.response.data);
             });
         }
     }

@@ -6,10 +6,16 @@
           <div class="col-lg-5">
             <div class="card shadow-lg border-0 rounded-lg mt-5">
               <div class="card-header">
-                <h3 class="text-center font-weight-light my-4">DevHouse</h3>
+                <h3 class="text-center font-weight-light my-4">RecapPlus</h3>
               </div>
               <div class="card-body">
                 <form>
+                  <div v-if="this.errors.data !== null"
+                    class="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <strong>Ops!</strong> {{this.errors.data}}
+                  </div>
                   <div class="form-floating mb-3">
                     <input
                       class="form-control"
@@ -37,10 +43,8 @@
                       @click.prevent="login"
                       >Entrar</a
                     >
-                    <hr>
-                    <div class="text-center text-muted">
-                      version 1.0.0
-                    </div>
+                    <hr />
+                    <div class="text-center text-muted">version 1.0.0</div>
                   </div>
                 </form>
               </div>
@@ -65,7 +69,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      error: "fetchUserError",
+      errors: "fetchUserError",
       user: "fetchUser",
     }),
   },
@@ -76,11 +80,11 @@ export default {
     async login() {
       await this.authUser(this.form);
 
-      if (!this.error.length) {
+      if (!this.errors.data) {
         return this.$router.push({ name: "Dashboard" });
       }
     },
-  }
+  },
 };
 </script>
 
