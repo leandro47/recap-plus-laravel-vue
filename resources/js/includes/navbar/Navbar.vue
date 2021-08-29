@@ -52,7 +52,7 @@ export default {
       await this.logoutUser();
 
       if (!this.error.length) {
-        return this.$router.push({ name: "Login" });
+        return this.$router.push({ name: "login" });
       }
     },
     sidebarToggle() {

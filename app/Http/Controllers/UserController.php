@@ -39,7 +39,7 @@ class UserController extends Controller
             return response()->json(Auth::user(), Response::HTTP_OK);
         }
 
-        $response['data'] = 'Verifique suas informações!';
+        $response['data'] = 'Email ou senha inválidos!';
         $response['status'] = Response::HTTP_UNAUTHORIZED;
 
         return response()->json($response, $response['status']);

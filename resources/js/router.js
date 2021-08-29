@@ -4,7 +4,10 @@ import VueRouter from 'vue-router';
 import Register from './pages/user/Register';
 import Login from './pages/auth/Login';
 import Dashboard from './pages/dashboard/Dashboard';
+import Home from './pages/home/Home';
 import NotFound from './pages/response/NotFound';
+import AddClient from './pages/client/Add';
+import ListClient from './pages/client/List';
 
 Vue.use(VueRouter);
 
@@ -30,26 +33,38 @@ const router = new VueRouter({
     routes: [
         {
             path: "/",
-            name: "Home",
-            component: Dashboard,
+            name: "home",
+            component: Home,
             beforeEnter: auth
         },
         {
             path: '/register',
-            name: 'Register',
+            name: 'register',
             component: Register,
             beforeEnter: guest
         },
         {
             path: '/login',
             component: Login,
-            name: 'Login',
+            name: 'login',
             beforeEnter: guest
         },
         {
             path: "/dashboard",
-            name: "Dashboard",
+            name: "dashboard",
             component: Dashboard,
+            beforeEnter: auth
+        },
+        {
+            path: "/add-client",
+            name: "add-client",
+            component: AddClient,
+            beforeEnter: auth
+        },
+        {
+            path: "/list-client",
+            name: "list-client",
+            component: ListClient,
             beforeEnter: auth
         },
         {

@@ -20,6 +20,8 @@ export default {
             await axios.get("/api/user")
                 .then((user) => {
                     commit("fetchUser", user.data);
+                }).catch((error) => {
+                   console.log('User not authenticated')
                 });
         },
         async authUser({ commit }, dataObject) {
