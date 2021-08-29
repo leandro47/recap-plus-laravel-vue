@@ -21,7 +21,7 @@
 
           <DropDownSideBar
             :label="'Clientes'"
-            :icon="'fas fa-home'"
+            :icon="'fas fa-address-card'"
             :items="[
               { label: 'Incluir', route: 'add-client' },
               { label: 'Listar', route: 'list-client' },
