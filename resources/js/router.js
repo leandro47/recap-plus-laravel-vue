@@ -23,7 +23,7 @@ const auth = (to, form, next) => {
     axios.get('/api/athenticated').then(() => {
         next()
     }).catch(() => {
-        return next({ name: 'Login' })
+        return next({ name: 'login' })
     })
 };
 

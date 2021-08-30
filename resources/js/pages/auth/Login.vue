@@ -81,7 +81,7 @@ export default {
       await this.authUser(this.form);
 
       if (!this.errors.data) {
-        return this.$router.push({ name: "Dashboard" });
+        return this.$router.push({ name: "dashboard" });
       }
     },
   },
