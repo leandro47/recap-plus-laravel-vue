@@ -33,12 +33,16 @@
           <thead class="">
             <tr>
               <th class="text-right">Código</th>
-              <th>Descrição</th>
-              <th>Ações</th>
+              <th>Nome</th>
+              <th>CPF/CNPJ</th>
+              <th>tipo</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td></td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -57,16 +61,18 @@ export default {
   computed: {
     ...mapGetters({
       errors: "fetchClientError",
+      list: "listClient"
     }),
   },
   methods: {
     ...mapActions({
       fetchClient: "fetchClient",
-    }),
+    })
   },
-  created() {
-    this.fetchClient();
-  }
+  async created() {
+    await this.fetchClient()
+    console.log(this.list)
+  },
 };
 </script>
 
