@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/athenticated', function () {
 
 Route::post('register', 'UserController@register')->name('register');
 Route::post('login', 'UserController@login')->name('login');
+Route::post('logout', 'UserController@logout')->name('logout');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', 'UserController@logout')->name('logout');
     Route::get('/list-client', 'ClientController@list')->name('list-client');
 });
