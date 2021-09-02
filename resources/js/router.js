@@ -68,6 +68,12 @@ const router = new VueRouter({
             beforeEnter: auth
         },
         {
+            path: "/edit-client",
+            name: "edit-client",
+            component: AddClient,
+            beforeEnter: auth
+        },
+        {
             path: '*',
             component: NotFound
         },

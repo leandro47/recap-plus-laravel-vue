@@ -12,7 +12,7 @@ class ClientRepository implements RepositoryInterface
         return Client::find($id);
     }
 
-    public function fetchAll(string $orderBy, string $order, int $paginate, string $search)
+    public function fetchAll(string $orderBy = 'id', string $order = 'DESC', int $paginate = 15, string $search = '')
     {
         if ($search !== '') {
             return $this->fetchWithLikeWhere($orderBy, strtoupper($order), $paginate, $search);

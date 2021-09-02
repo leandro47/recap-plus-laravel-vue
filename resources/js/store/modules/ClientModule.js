@@ -6,22 +6,20 @@ export default {
         errors: {data: null, status: null}
     },
     getters: {
-        fetchClientError (state) {return state.errors},
-        listClient (state) {return state.client},
+        getClientError (state) {return state.errors},
+        getClients (state) {return state.client},
     },
     mutations: {
         setErrors: (state, errors) => state.errors = errors,
         clearErrors: (state) => state.errors = {data: null, status: null},
-        listClient: (state, data) => state.client = data,
+        fetchClients: (state, data) => state.client = data,
     },
     actions: {
-        async fetchClient({ commit }) {
-            await axios.get("/api/list-client")
+        async fetchClients({ commit }, payload) {
+            await axios.get(`/api/list-client?page=${payload.page}&search=${payload.search}`)
                 .then((data) => {
-                    debugger;
-                    commit("listClient", data.data);
+                    commit("fetchClients", data.data.data);
                 }).catch((error) => {
-                    debugger;
                     commit("setErrors", error.response.data);
                 });
         },
