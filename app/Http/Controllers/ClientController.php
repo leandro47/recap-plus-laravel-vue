@@ -22,4 +22,25 @@ class ClientController extends Controller
 
         return response()->json($response, Response::HTTP_OK);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param string $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function show($uuid)
+    {
+        $response['data'] = [];
+        $response['status'] = Response::HTTP_OK;
+
+        $client = $this->clientRepository->where([
+            'uuid' => $uuid
+        ])->first();
+
+        return response()->json([
+            'data' => $client,
+            'status' => Response::HTTP_OK
+        ], Response::HTTP_OK);
+    }
 }

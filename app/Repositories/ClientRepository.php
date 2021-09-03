@@ -18,7 +18,7 @@ class ClientRepository implements RepositoryInterface
             return $this->fetchWithLikeWhere($orderBy, strtoupper($order), $paginate, $search);
         }
 
-        return Client::orderBy($orderBy, strtoupper($order))->paginate($paginate);
+        return Client::with(['city'])->orderBy($orderBy, strtoupper($order))->paginate($paginate);
     }
 
     public function where(array $where)
@@ -66,6 +66,7 @@ class ClientRepository implements RepositoryInterface
     public function fetchWithLikeWhere(string $orderBy, string $order, int $paginate, string $search)
     {
         return Client::where('id', 'LIKE', "%{$search}%")
+        ->with(['city'])
         ->orWhere('name', 'LIKE', "%{$search}%")
         ->orWhere('cpf_cnpj', 'LIKE', "%{$search}%")
         ->orWhere('street', 'LIKE', "%{$search}%")

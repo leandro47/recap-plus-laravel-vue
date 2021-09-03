@@ -3,16 +3,19 @@ import axios from 'axios'
 export default {
     state: {
         client: {},
-        errors: {data: null, status: null}
+        clients: {},
+        errors: { data: null, status: null }
     },
     getters: {
-        getClientError (state) {return state.errors},
-        getClients (state) {return state.client},
+        getClientError(state) { return state.errors },
+        getClients(state) { return state.clients },
+        getClient(state) { return state.client },
     },
     mutations: {
         setErrors: (state, errors) => state.errors = errors,
-        clearErrors: (state) => state.errors = {data: null, status: null},
-        fetchClients: (state, data) => state.client = data,
+        clearErrors: (state) => state.errors = { data: null, status: null },
+        fetchClients: (state, data) => state.clients = data,
+        fetchClient: (state, data) => state.client = data,
     },
     actions: {
         async fetchClients({ commit }, payload) {
@@ -22,6 +25,13 @@ export default {
                 }).catch((error) => {
                     commit("setErrors", error.response.data);
                 });
+        },
+        async fetchClient({ commit }, uuid) {
+            await axios.get(`/api/edit-client/${uuid}`)
+                .then((data) => {
+                    commit("fetchClient", data.data.data)
+                })
+                .catch(error => console.log(error))
         },
     }
 }

@@ -4,7 +4,7 @@
       <Navbar></Navbar>
       <div id="layoutSidenav">
         <Sidebar></Sidebar>
-        <div id="layoutSidenav_content">
+        <div class="back" id="layoutSidenav_content">
           <main>
             <div class="container-fluid px-4">
               <router-view></router-view>
@@ -56,5 +56,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.back {
+  background-color: #F1F1F1;
+}
 </style>

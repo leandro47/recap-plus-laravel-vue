@@ -1,5 +1,14 @@
 <template>
-  <div class="container-fluid mt-4">
+  <div class="mt-3">
+    <Breadcrumb
+      :links="[
+        {
+          name: 'Clientes',
+          route: 'list-client',
+          class: 'active',
+        },
+      ]"
+    ></Breadcrumb>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Clientes</h1>
     </div>
@@ -20,12 +29,13 @@
           Carregando...
         </router-link>
         <router-link
+          title="Adicionar"
           v-else
           class="btn btn-primary btn-block"
           :to="{ name: 'add-client' }"
           role="button"
         >
-          <i class="fas fa-plus"></i> Adicionar
+          <i class="fas fa-plus"></i>
         </router-link>
       </div>
 
@@ -50,16 +60,16 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="card shadow-sm p-3 mb-5 rounded">
+        <div class="card shadow-sm p-3 mb-4 rounded">
           <div class="card-body">
             <div class="table-responsive table-sm-mb-2" v-if="!isLoading">
-              <table class="table table-striped table-hover">
+              <table class="table table-hover">
                 <thead class="">
                   <tr>
                     <th class="text-right">Código</th>
                     <th>Nome</th>
                     <th>CPF/CNPJ</th>
-                    <th>Telefone</th>
+                    <th>Cidade</th>
                     <th>Email</th>
                     <th>Ações</th>
                   </tr>
@@ -69,20 +79,23 @@
                     <td>{{ client.id }}</td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.cpf_cnpj }}</td>
-                    <td>{{ client.phone }}</td>
+                    <td>{{ client.city.name }}</td>
                     <td>{{ client.email }}</td>
-                    <td class="text-center" style="width: 15%">
+                    <td>
                       <div class="btn-group btn-group-sm">
-                      <router-link
-                        class="btn btn-warning"
-                        :to="{
-                          name: 'edit-client',
-                          params: { uuid: client.uuid },
-                        }"
-                      >
-                        <i class="fa fa-edit"></i> Editar
-                      </router-link>
-                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                        <router-link
+                          class="btn btn-warning"
+                          :to="{
+                            name: 'edit-client',
+                            params: { uuid: client.uuid },
+                          }"
+                          title="Editar"
+                        >
+                          <i class="fa fa-edit"></i>
+                        </router-link>
+                        <a href="#" class="btn btn-danger" title="Excluir"
+                          ><i class="fa fa-trash"></i
+                        ></a>
                       </div>
                     </td>
                   </tr>
@@ -116,6 +129,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Pagination from "laravel-vue-pagination";
+import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
 
 export default {
   data() {
@@ -126,6 +140,7 @@ export default {
   },
   components: {
     Pagination,
+    Breadcrumb,
   },
   computed: {
     ...mapGetters({

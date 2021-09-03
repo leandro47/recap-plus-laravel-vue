@@ -7,6 +7,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Home from './pages/home/Home';
 import NotFound from './pages/response/NotFound';
 import AddClient from './pages/client/Add';
+import EditClient from './pages/client/Edit';
 import ListClient from './pages/client/List';
 
 Vue.use(VueRouter);
@@ -70,7 +71,7 @@ const router = new VueRouter({
         {
             path: "/edit-client",
             name: "edit-client",
-            component: AddClient,
+            component: EditClient,
             beforeEnter: auth
         },
         {
