@@ -15,6 +15,12 @@ class ClientController extends Controller
         $this->clientRepository = $clientRepository;
     }
 
+    /**
+     * List all resources
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function list(Request $request)
     {
         $response['data'] = $this->clientRepository->fetchAll('id', 'DESC', 15, ($request->input('search') ?? ''));

@@ -1,10 +1,10 @@
 <template>
-  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <nav class="sb-topnav navbar navbar-expand c-navbar">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="#!">RecapPlus</a>
+    <router-link class="navbar-brand ps-3 c-navbar-item" :to="{name: 'home'}">RecapPlus</router-link>
     <!-- Sidebar Toggle-->
     <button
-      class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+      class="btn btn-link c-navbar-item btn-sm order-1 order-lg-0 me-4 me-lg-0"
       id="sidebarToggle"
       href="#!"
       @click.prevent="sidebarToggle"
@@ -15,7 +15,7 @@
     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
       <li class="nav-item dropdown">
         <a
-          class="nav-link dropdown-toggle"
+          class="c-navbar-item dropdown-toggle"
           id="navbarDropdown"
           href="#"
           role="button"
@@ -27,7 +27,7 @@
           class="dropdown-menu dropdown-menu-end"
           aria-labelledby="navbarDropdown"
         >
-          <li><a class="dropdown-item" href="#!" @click.prevent="logout">Sair</a></li>
+          <li><a class="dropdown-item" href="#!" @click.prevent="logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
         </ul>
       </li>
     </ul>

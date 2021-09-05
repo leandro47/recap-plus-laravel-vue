@@ -10,7 +10,8 @@
         const BASE_URL = "{{ url('/') }}"
     </script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>

@@ -4,9 +4,9 @@
       :links="[
         {
           name: 'Clientes',
-          route: 'edit-client',
+          route: 'list-client',
           class: 'active',
-        },
+        }
       ]"
     ></Breadcrumb>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -20,9 +20,6 @@ import { mapGetters, mapActions } from "vuex";
 import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
 
 export default {
-  data() {
-
-  },
   components: {
     Breadcrumb,
   },
@@ -32,17 +29,17 @@ export default {
     }),
   },
   created() {
-    this.edit(this.$route.params.uuid);
+    this.edit(this.$route.query.uuid);
   },
   methods: {
     ...mapActions({
       fetchClient: "fetchClient",
     }),
+    async edit(uuid) {
+      await this.fetchClient(uuid);
+      console.log(this.client);
+    },
   },
-  async edit(uuid) {
-    await this.fetchClient(uuid);
-    console.log(client);
-  }
 };
 </script>
 

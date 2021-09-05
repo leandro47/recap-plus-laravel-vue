@@ -1,10 +1,10 @@
 <template>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+  <nav aria-label="breadcrumb" >
+    <ol class="breadcrumb shadow-none p-3 c-breadcrumb rounded">
     <router-link class="breadcrumb-item" :to="{name: 'home'}">Home</router-link>
       <router-link
         v-for="link in links"
-        :key="link.route"
+        :key="link.name"
         :class="`breadcrumb-item ${link.class}`"
         :to="{name: link.route}"
       >

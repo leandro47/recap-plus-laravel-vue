@@ -1,0 +1,32 @@
+.c-btn-primary {
+    background-color: #3f61d4;
+    color: #ffffff;
+}
+
+.c-navbar {
+    background-color: #225884;
+}
+
+.c-sidebar {
+    background-color: #225884;
+    
+}
+
+.c-navbar-item {
+    color: #ffffff;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.c-navbar-item:hover{
+    color:rgb(204, 204, 204);
+}
+
+.c-breadcrumb{
+    background-color: #f1f1f1;
+    border: 1px solid #e0dada;
+}
+
+.c-table-thead{
+    background-color: #e9e9e9;
+}

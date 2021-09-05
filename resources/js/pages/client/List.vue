@@ -1,5 +1,8 @@
 <template>
   <div class="mt-3">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Clientes</h1>
+    </div>
     <Breadcrumb
       :links="[
         {
@@ -9,73 +12,77 @@
         },
       ]"
     ></Breadcrumb>
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Clientes</h1>
-    </div>
 
-    <div class="row justify-content-between">
-      <div class="col-md-2 mb-3">
-        <router-link
-          v-if="isLoading"
-          class="btn btn-primary btn-block disabled"
-          :to="{ name: 'add-client' }"
-          role="button"
-        >
-          <span
-            class="spinner-grow spinner-grow-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-          Carregando...
-        </router-link>
-        <router-link
-          title="Adicionar"
-          v-else
-          class="btn btn-primary btn-block"
-          :to="{ name: 'add-client' }"
-          role="button"
-        >
-          <i class="fas fa-plus"></i>
-        </router-link>
-      </div>
-
-      <div class="col-md-6 col-lg-3 mb-3">
-        <form @submit.prevent="searchData(1)">
-          <div class="input-group">
-            <input
-              v-model="search"
-              type="text"
-              :disabled="isLoading"
-              placeholder="Filtrar"
-              class="form-control bg-light"
-            />
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">
-                <i class="fas fa-search fa-sm"></i>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
     <div class="row">
       <div class="col-12">
-        <div class="card shadow-sm p-3 mb-4 rounded">
+        <div class="card shadow-none mb-4 rounded">
+          <div class="card-header">
+            <div class="row justify-content-between">
+              <div class="col-md-2">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <router-link
+                    v-if="isLoading"
+                    class="btn c-btn-primary disabled"
+                    :to="{ name: 'add-client' }"
+                    role="button"
+                  >
+                    <span
+                      class="spinner-grow spinner-grow-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  </router-link>
+                  <router-link
+                    title="Adicionar"
+                    v-else
+                    class="btn c-btn-primary m-1"
+                    :to="{ name: 'add-client' }"
+                    role="button"
+                  >
+                    <i class="fas fa-plus"></i>
+                  </router-link>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-lg-3">
+                <form @submit.prevent="searchData(1)">
+                  <div class="input-group m-1">
+                    <input
+                      v-model="search"
+                      type="text"
+                      :disabled="isLoading"
+                      placeholder="Filtrar"
+                      class="form-control bg-light"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn c-btn-primary"
+                        title="Pesquisar"
+                        type="submit"
+                      >
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <div class="card-body">
-            <div class="table-responsive table-sm-mb-2" v-if="!isLoading">
-              <table class="table table-hover">
-                <thead class="">
-                  <tr>
-                    <th class="text-right">Código</th>
-                    <th>Nome</th>
-                    <th>CPF/CNPJ</th>
-                    <th>Cidade</th>
-                    <th>Email</th>
-                    <th>Ações</th>
+            <div class="table-responsive" v-if="!isLoading">
+              <table class="table table-sm table-hover">
+                <thead class="c-table-thead">
+                  <tr class="">
+                    <th class="text-right fw-normal">Código</th>
+                    <th class="fw-normal">Nome</th>
+                    <th class="fw-normal">CPF/CNPJ</th>
+                    <th class="fw-normal">Cidade</th>
+                    <th class="fw-normal">Email</th>
+                    <th class="fw-normal">Ações</th>
                   </tr>
                 </thead>
                 <tbody v-for="client in clients.data" :key="client.id">
-                  <tr>
+                  <tr class="fw-light">
                     <td>{{ client.id }}</td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.cpf_cnpj }}</td>
@@ -84,16 +91,16 @@
                     <td>
                       <div class="btn-group btn-group-sm">
                         <router-link
-                          class="btn btn-warning"
+                          class="btn btn-sm btn-warning"
                           :to="{
                             name: 'edit-client',
-                            params: { uuid: client.uuid },
+                            query: { uuid: client.uuid },
                           }"
                           title="Editar"
                         >
                           <i class="fa fa-edit"></i>
                         </router-link>
-                        <a href="#" class="btn btn-danger" title="Excluir"
+                        <a href="#" class="btn btn-sm btn-danger" title="Excluir"
                           ><i class="fa fa-trash"></i
                         ></a>
                       </div>
