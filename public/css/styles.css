@@ -11468,14 +11468,14 @@ body {
 }
 
 .sb-sidenav-dark {
-  background-color: #212529;
+  background-color: #276292;
   color: rgba(255, 255, 255, 0.5);
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.671);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
   color: rgba(255, 255, 255, 0.25);
@@ -11493,7 +11493,7 @@ body {
   color: #fff;
 }
 .sb-sidenav-dark .sb-sidenav-footer {
-  background-color: #343a40;
+  background-color: #225884;
 }
 
 .sb-sidenav-light {

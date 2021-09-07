@@ -1,5 +1,5 @@
 <template>
-  <div id="layoutAuthentication_content">
+  <div class="background" id="layoutAuthentication_content">
     <main>
       <div class="container">
         <div class="row justify-content-center">
@@ -38,10 +38,10 @@
                   </div>
                   <div class="d-grid gap-2">
                     <a
-                      class="btn btn-primary"
+                      class="btn c-btn-primary"
                       type="button"
                       @click.prevent="login"
-                      >Entrar</a
+                      ><i class="fas fa-sign-in-alt"></i> Entrar</a
                     >
                     <hr />
                     <div class="text-center text-muted">version 1.0.0</div>
@@ -89,4 +89,7 @@ export default {
 </script>
 
 <style scoped>
+.background{
+  background-color: #225884;
+}
 </style>

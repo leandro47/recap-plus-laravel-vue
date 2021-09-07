@@ -1,17 +1,7 @@
 <template>
   <div class="mt-3">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Clientes</h1>
-    </div>
-    <Breadcrumb
-      :links="[
-        {
-          name: 'Clientes',
-          route: 'list-client',
-          class: 'active',
-        },
-      ]"
-    ></Breadcrumb>
+    <HeadPage :title="'Clientes'" :icon="'fas fa-address-card'"></HeadPage>
+    <Breadcrumb :links="[]" :active="'Clientes'"></Breadcrumb>
 
     <div class="row">
       <div class="col-12">
@@ -22,7 +12,7 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <router-link
                     v-if="isLoading"
-                    class="btn c-btn-primary disabled"
+                    class="btn c-btn c-btn-primary disabled mt-1 mb-1"
                     :to="{ name: 'add-client' }"
                     role="button"
                   >
@@ -33,9 +23,9 @@
                     ></span>
                   </router-link>
                   <router-link
-                    title="Adicionar"
+                    title="Incluir"
                     v-else
-                    class="btn c-btn-primary m-1"
+                    class="btn c-btn c-btn-primary mt-1 mb-1"
                     :to="{ name: 'add-client' }"
                     role="button"
                   >
@@ -51,7 +41,7 @@
                       v-model="search"
                       type="text"
                       :disabled="isLoading"
-                      placeholder="Filtrar"
+                      placeholder="Pesquisar..."
                       class="form-control bg-light"
                     />
                     <div class="input-group-append">
@@ -91,7 +81,7 @@
                     <td>
                       <div class="btn-group btn-group-sm">
                         <router-link
-                          class="btn btn-sm btn-warning"
+                          class="btn btn-sm text-warning"
                           :to="{
                             name: 'edit-client',
                             query: { uuid: client.uuid },
@@ -100,7 +90,10 @@
                         >
                           <i class="fa fa-edit"></i>
                         </router-link>
-                        <a href="#" class="btn btn-sm btn-danger" title="Excluir"
+                        <a
+                          href="#"
+                          class="btn btn-sm text-danger"
+                          title="Excluir"
                           ><i class="fa fa-trash"></i
                         ></a>
                       </div>
@@ -137,6 +130,7 @@
 import { mapGetters, mapActions } from "vuex";
 import Pagination from "laravel-vue-pagination";
 import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
+import HeadPage from "./../../components/headpage/HeadPage";
 
 export default {
   data() {
@@ -148,6 +142,7 @@ export default {
   components: {
     Pagination,
     Breadcrumb,
+    HeadPage,
   },
   computed: {
     ...mapGetters({
@@ -156,7 +151,6 @@ export default {
     }),
   },
   methods: {
-    ...mapActions({}),
     async searchData(param = 1) {
       this.isLoading = true;
 

@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import UserModule from './modules/UserModule';
-import ClientModule from './modules/ClientModule'
+import ClientModule from './modules/ClientModule';
+import StateModule from './modules/StateModule';
 
 Vue.use(Vuex)
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     },
     modules: {
         UserModule,
-        ClientModule
+        ClientModule,
+        StateModule,
     }
 })

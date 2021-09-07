@@ -1,7 +1,7 @@
 <template>
   <div>
     <a
-      class="nav-link collapsed"
+      class="nav-link c-sidebar-item collapsed"
       href="#"
       data-bs-toggle="collapse"
       data-bs-target="#collapseLayouts"
@@ -20,7 +20,7 @@
       aria-labelledby="headingOne"
       data-bs-parent="#sidenavAccordion"
     >
-      <nav class="sb-sidenav-menu-nested nav">
+      <nav class="sb-sidenav-menu-nested c-sidebar-item nav">
         <router-link
           v-for="item in items"
           :key="item.route"

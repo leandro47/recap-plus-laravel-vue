@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link class="nav-link" :to="{name: route}">
+    <router-link class="nav-link c-sidebar-item" :to="{name: route}">
       <div class="sb-nav-link-icon">
         <i :class="icon"></i>
       </div>
