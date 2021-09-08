@@ -30,7 +30,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Client
     Route::get('/list-client', 'ClientController@list')->name('list-client');
     Route::get('/edit-client/{uuid}', 'ClientController@show')->name('edit-client');
+    Route::post('/store-client', 'ClientController@store')->name('store-client');
 
     // State
     Route::get('/list-state', 'StateController@list')->name('list-state');
+
+    // City
+    Route::get('/list-city/{id}', 'CityController@list')->name('list-city');
 });

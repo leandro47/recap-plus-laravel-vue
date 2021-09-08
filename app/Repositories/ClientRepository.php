@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Client;
 use App\Interfaces\RepositoryInterface;
+use Illuminate\Support\Str;
 
 class ClientRepository implements RepositoryInterface
 {
@@ -29,6 +30,19 @@ class ClientRepository implements RepositoryInterface
     public function store(array $data): Client
     {
         $client = new Client();
+
+        $client->uuid = Str::uuid();
+        $client->type = $data['type'];
+        $client->name = $data['name'];
+        $client->cpf_cnpj = $data['cpf_cnpj'];
+        $client->city_id = $data['city']['id'];
+        $client->cep = $data['cep'];
+        $client->district = $data['district'];
+        $client->street = $data['street'];
+        $client->number = $data['number'];
+        $client->email = $data['email'];
+        $client->phone = $data['phone'];
+        $client->cell_phone = $data['cell_phone'];
 
         if (!$client->save()) {
             throw new \Exception('Registro não inserido');

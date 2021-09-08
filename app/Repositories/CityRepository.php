@@ -18,45 +18,45 @@ class CityRepository implements RepositoryInterface
             return $this->fetchWithLikeWhere($orderBy, strtoupper($order), $paginate, $search);
         }
 
-        return City::with(['city'])->orderBy($orderBy, strtoupper($order))->paginate($paginate);
+        return City::select('id', 'name as label')->orderBy($orderBy)->get();
     }
 
     public function where(array $where)
     {
-        return City::where($where);
+        return City::select('id', 'name as label')->where($where);
     }
 
     public function store(array $data): City
     {
-        $client = new City();
+        $city = new City();
 
-        if (!$client->save()) {
+        if (!$city->save()) {
             throw new \Exception('Registro não inserido');
         }
 
-        return $client;
+        return $city;
     }
 
     public function update(string $uuid, array $data)
     {
-        $client = $this->where([
+        $city = $this->where([
             'uuid' => $uuid
         ])->first();
 
-        //$client->description = $data['description'];
+        //$city->description = $data['description'];
 
-        if (!$client->update()) {
+        if (!$city->update()) {
             throw new \Exception('Registro não inserido');
         }
     }
 
     public function delete(string $uuid)
     {
-        $client = $this->where([
+        $city = $this->where([
             'uuid' => $uuid
         ])->first();
 
-        if (!$client->delete()) {
+        if (!$city->delete()) {
             throw new \Exception('Registro não deletado');
         }
 
@@ -65,15 +65,17 @@ class CityRepository implements RepositoryInterface
 
     public function fetchWithLikeWhere(string $orderBy, string $order, int $paginate, string $search)
     {
-        return City::where('id', 'LIKE', "%{$search}%")
-        ->with(['city'])
-        ->orWhere('name', 'LIKE', "%{$search}%")
-        ->orWhere('cpf_cnpj', 'LIKE', "%{$search}%")
-        ->orWhere('street', 'LIKE', "%{$search}%")
-        ->orWhere('email', 'LIKE', "%{$search}%")
-        ->orWhere('phone', 'LIKE', "%{$search}%")
-        ->orWhere('cell_phone', 'LIKE', "%{$search}%")
-        ->orderBy($orderBy, $order)
-        ->paginate($paginate);
+        return City::select('id', 'name as label')
+            ->where('id', 'LIKE', "%{$search}%")
+            ->orWhere('name', 'LIKE', "%{$search}%")
+            ->orWhere('ibge_code', 'LIKE', "%{$search}%")
+            ->orderBy($orderBy, $order)->get();
+    }
+
+    public function citiesByState(string $stateId)
+    {
+        return City::select('id', 'name as label')
+            ->where('state_id', '=', $stateId)
+            ->orderBy("name", "ASC")->get();
     }
 }

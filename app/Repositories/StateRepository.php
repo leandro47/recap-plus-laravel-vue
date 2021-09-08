@@ -64,8 +64,8 @@ class StateRepository implements RepositoryInterface
     public function fetchWithLikeWhere(string $orderBy, string $order, int $paginate, string $search)
     {
         return State::select('id', 'name as label')->where('id', 'LIKE', "%{$search}%")
-        ->orWhere('name', 'LIKE', "%{$search}%")
-        ->orWhere('abbreviation', 'LIKE', "%{$search}%")
-        ->orderBy($orderBy, $order)->get();
+            ->orWhere('name', 'LIKE', "%{$search}%")
+            ->orWhere('abbreviation', 'LIKE', "%{$search}%")
+            ->orderBy($orderBy, $order)->get();
     }
 }

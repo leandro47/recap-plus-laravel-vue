@@ -16,6 +16,7 @@ export default {
         clearErrors: (state) => state.errors = { data: null, status: null },
         fetchClients: (state, data) => state.clients = data,
         fetchClient: (state, data) => state.client = data,
+        storeClients: (state, data) => state.clients.data.unshift(data),
     },
     actions: {
         async fetchClients({ commit }, payload) {
@@ -33,5 +34,19 @@ export default {
                 })
                 .catch(error => console.log(error))
         },
+        async storeClient({ commit }, dataObject) {
+            commit("clearErrors");
+            await axios.post(`/api/store-client/`, dataObject)
+                .then(data => {
+                    debugger;
+                    commit("storeClients", data.data.data)
+                })
+                .catch(error => {
+                    commit("setErrors", error.response.data);
+                })
+        },
+        async clearErrors({commit}) {
+            commit("clearErrors");
+        }
     }
 }

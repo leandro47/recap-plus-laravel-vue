@@ -23,8 +23,8 @@ class CreateClientsTable extends Migration
             $table->string('district');
             $table->string('street');
             $table->string('number');
-            $table->string('phone');
-            $table->string('cell_phone');
+            $table->string('phone')->nullable();
+            $table->string('cell_phone')->nullable();
             $table->string('email');
             $table->enum('type', ['J', 'F'])->default('F');
             $table->timestamps();
