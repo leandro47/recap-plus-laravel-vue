@@ -17,6 +17,10 @@ export default {
         fetchClients: (state, data) => state.clients = data,
         fetchClient: (state, data) => state.client = data,
         storeClients: (state, data) => state.clients.data.unshift(data),
+        destroyClient: (state, uuid) => {
+            const index = state.clients.data.findIndex(client => client.uuid === uuid)
+            state.clients.data.splice(index, 1)
+        },
     },
     actions: {
         async fetchClients({ commit }, payload) {
@@ -38,14 +42,22 @@ export default {
             commit("clearErrors");
             await axios.post(`/api/store-client/`, dataObject)
                 .then(data => {
-                    debugger;
                     commit("storeClients", data.data.data)
                 })
                 .catch(error => {
                     commit("setErrors", error.response.data);
                 })
         },
-        async clearErrors({commit}) {
+        async destroyClient({ commit }, uuid) {
+            await axios.delete(`/api/destroy-client/${uuid}`)
+                .then((data) => {
+                    commit("destroyClient", uuid)
+                })
+                .catch(error => {
+                    commit("setErrors", error.response.data);
+                })
+        },
+        async clearErrors({ commit }) {
             commit("clearErrors");
         }
     }

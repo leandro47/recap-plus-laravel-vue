@@ -91,7 +91,7 @@
                           <i class="fa fa-edit"></i>
                         </router-link>
                         <a
-                          href="#"
+                          @click.prevent="deleteClient(client.uuid)"
                           class="btn btn-sm text-danger"
                           title="Excluir"
                           ><i class="fa fa-trash"></i
@@ -151,6 +151,13 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+      destroyClient: "destroyClient",
+    }),
+    async deleteClient(uuid) {
+      console.log(uuid);
+      await this.destroyClient(uuid);
+    },
     async searchData(param = 1) {
       this.isLoading = true;
 

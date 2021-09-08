@@ -91,4 +91,27 @@ class ClientController extends Controller
 
         return response()->json($response, $response['status']);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param string  $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($uuid)
+    {
+        $response = [
+            'data' => [],
+            'status' => Response::HTTP_OK
+        ];
+
+        try {
+            $this->clientRepository->delete($uuid);
+        } catch (\Exception $e) {
+            $response['data'] = 'Erro ao processar sua requisição!';
+            $response['status'] = Response::HTTP_INTERNAL_SERVER_ERROR;
+        }
+
+        return response()->json($response, $response['status']);
+    }
 }
