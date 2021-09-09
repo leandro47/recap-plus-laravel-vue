@@ -28,6 +28,7 @@ class CreateClientsTable extends Migration
             $table->string('email');
             $table->enum('type', ['J', 'F'])->default('F');
             $table->timestamps();
+            $table->date('deleted_at')->nullable();
         });
     }
 

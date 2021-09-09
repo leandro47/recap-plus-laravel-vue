@@ -35,7 +35,8 @@ class ClientFactory extends Factory
             'email' => $this->faker->email,
             'type' => 'F',
             'created_at'=> now(),
-            'updated_at'=> now()
+            'updated_at'=> null,
+            'deleted_at'=> null,
         ];
     }
 }

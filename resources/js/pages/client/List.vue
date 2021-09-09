@@ -155,7 +155,6 @@ export default {
       destroyClient: "destroyClient",
     }),
     async deleteClient(uuid) {
-      console.log(uuid);
       await this.destroyClient(uuid);
     },
     async searchData(param = 1) {

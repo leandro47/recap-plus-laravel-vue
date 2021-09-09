@@ -49,7 +49,7 @@ export default {
                 })
         },
         async destroyClient({ commit }, uuid) {
-            await axios.delete(`/api/destroy-client/${uuid}`)
+            await axios.delete(`/api/delete-client/${uuid}`)
                 .then((data) => {
                     commit("destroyClient", uuid)
                 })
