@@ -38,4 +38,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // City
     Route::get('/list-city/{id}', 'CityController@list')->name('list-city');
+    Route::get('/show-city/{id}', 'CityController@show')->name('show-city');
 });

@@ -23,7 +23,7 @@ class CityRepository implements RepositoryInterface
 
     public function where(array $where)
     {
-        return City::select('id', 'name as label')->where($where);
+        return City::with(['state'])->where($where);
     }
 
     public function store(array $data): City
