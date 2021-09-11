@@ -76,6 +76,7 @@ export default {
   methods: {
     ...mapActions({
       authUser: "authUser",
+      clearUserErrors: "clearUserErrors"
     }),
     async login() {
       await this.authUser(this.form);
@@ -85,6 +86,9 @@ export default {
       }
     },
   },
+  mounted: function () {
+    this.clearUserErrors();
+  }
 };
 </script>
 

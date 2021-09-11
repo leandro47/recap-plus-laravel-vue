@@ -117,7 +117,7 @@
 
               <div class="col-md-2">
                 <label for="city_id" class="form-label">Cidade</label>
-                <v-select v-model="form.city" :options="cities"></v-select>
+                <v-select v-model="form.city"  @input="clearErrors" :options="cities"></v-select>
               </div>
 
               <div class="col-md-2">
@@ -207,7 +207,9 @@ import "vue-select/dist/vue-select.css";
 export default {
   data() {
     return {
-      form: {},
+      form: {
+
+      },
     };
   },
   components: {
@@ -235,19 +237,22 @@ export default {
       fetchCity: "fetchCity",
     }),
     async updateCities() {
-      if (this.form.state !== null) {
+      this.form.city = null;
+      if (this.form.state != null) {
         await this.fetchCities(this.form.state.id);
       } else {
         await this.fetchCities(-1);
-        this.form.city = null;
       }
+    },
+    async setCity() {
+      this.form.city = this.form.city;
     },
     async editclient(uuid) {
       await this.fetchClient(uuid);
       await this.fetchCity(this.client.city_id);
       this.form = this.client;
       this.form.state = this.city.state;
-      await this.updateCities();
+      this.updateCities()
       this.form.city = this.city.city;
     },
     async formAction() {

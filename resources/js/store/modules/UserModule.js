@@ -44,6 +44,9 @@ export default {
             .catch((error) => {
                 commit("setErrors", error.response.data);
             });
+        },
+        async clearUserErrors({commit}) {
+            commit("clearErrors")
         }
     }
 }
