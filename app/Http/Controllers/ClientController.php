@@ -145,7 +145,7 @@ class ClientController extends Controller
     public function destroy($uuid)
     {
         $response = [
-            'data' => [],
+            'data' => "Registro excluído!",
             'status' => Response::HTTP_OK
         ];
 

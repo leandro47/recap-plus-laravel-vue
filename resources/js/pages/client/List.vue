@@ -155,7 +155,9 @@ export default {
       destroyClient: "destroyClient",
     }),
     async deleteClient(uuid) {
-      await this.destroyClient(uuid);
+      this.$confirm("Deseja realmente deletar esse registro?", "Cuidado!").then(() => {
+        this.destroyClient(uuid);
+      });
     },
     async searchData(param = 1) {
       this.isLoading = true;

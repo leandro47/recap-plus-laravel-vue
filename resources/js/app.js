@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./config/toastr');
 
 window.Vue = require('vue').default;
 
@@ -9,6 +10,9 @@ import store from './store/store';
 import App from './layouts/App.vue';
 import VueAxios from 'vue-axios';
 import vSelect from "vue-select";
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
 
 const app = new Vue({
     router,
