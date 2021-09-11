@@ -207,9 +207,7 @@ import "vue-select/dist/vue-select.css";
 export default {
   data() {
     return {
-      form: {
-
-      },
+      form: {}
     };
   },
   components: {
@@ -231,7 +229,7 @@ export default {
     ...mapActions({
       fetchStates: "fetchStates",
       fetchCities: "fetchCities",
-      storeClient: "storeClient",
+      updateClient: "updateClient",
       clearErrors: "clearErrors",
       fetchClient: "fetchClient",
       fetchCity: "fetchCity",
@@ -244,19 +242,16 @@ export default {
         await this.fetchCities(-1);
       }
     },
-    async setCity() {
-      this.form.city = this.form.city;
-    },
     async editclient(uuid) {
       await this.fetchClient(uuid);
       await this.fetchCity(this.client.city_id);
       this.form = this.client;
       this.form.state = this.city.state;
-      this.updateCities()
+      this.updateCities();
       this.form.city = this.city.city;
     },
     async formAction() {
-      await this.storeClient(this.form);
+      await this.updateClient(this.form);
       if (!this.clientError.data) {
         return this.$router.push({ name: "list-client" });
       }

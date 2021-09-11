@@ -57,11 +57,23 @@ class ClientRepository implements RepositoryInterface
             'uuid' => $uuid
         ])->first();
 
-        //$client->description = $data['description'];
+        $client->type = $data['type'];
+        $client->name = $data['name'];
+        $client->cpf_cnpj = $data['cpf_cnpj'];
+        $client->city_id = $data['city']['id'];
+        $client->cep = $data['cep'];
+        $client->district = $data['district'];
+        $client->street = $data['street'];
+        $client->number = $data['number'];
+        $client->email = $data['email'];
+        $client->phone = $data['phone'];
+        $client->cell_phone = $data['cell_phone'];
 
         if (!$client->update()) {
-            throw new \Exception('Registro não inserido');
+            throw new \Exception('Registro não atualizado');
         }
+
+        return $client;
     }
 
     public function delete(string $uuid)

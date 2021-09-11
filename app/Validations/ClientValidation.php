@@ -7,7 +7,7 @@ use App\Interfaces\ValidateInterface;
 
 class ClientValidation extends AbstractValidation implements ValidateInterface
 {
-    public static function formValidate(array $input): string
+    public static function formValidate(array $input, bool $isUpdate = false): string
     {
         $rules = [
             'email' => 'required|email',
@@ -20,6 +20,10 @@ class ClientValidation extends AbstractValidation implements ValidateInterface
             'street' => 'required',
             'number' => 'required',
         ];
+
+        if ($isUpdate) {
+            $rules['cpf_cnpj'] = 'required';
+        }
 
         $messages = [
             'email.required' => 'Email não preenchido',

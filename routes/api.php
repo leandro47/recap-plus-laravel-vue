@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/edit-client/{uuid}', 'ClientController@show')->name('edit-client');
     Route::post('/store-client', 'ClientController@store')->name('store-client');
     Route::delete('/delete-client/{uuid}', 'ClientController@destroy')->name('delete-client');
+    Route::put('/update-client/{uuid}', 'ClientController@update')->name('update-client');
 
     // State
     Route::get('/list-state', 'StateController@list')->name('list-state');

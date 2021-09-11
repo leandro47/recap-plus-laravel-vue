@@ -19,6 +19,7 @@ export default {
         storeClients: (state, data) => state.clients.data.unshift(data),
         destroyClient: (state, uuid) => {
             const index = state.clients.data.findIndex(client => client.uuid === uuid)
+
             state.clients.data.splice(index, 1)
         },
     },
@@ -35,14 +36,13 @@ export default {
             await axios.get(`/api/edit-client/${uuid}`)
                 .then((data) => {
                     commit("fetchClient", data.data.data)
-                })
-                .catch(error => console.log(error))
+                });
         },
         async storeClient({ commit }, dataObject) {
             commit("clearErrors");
             await axios.post(`/api/store-client/`, dataObject)
                 .then(data => {
-                    commit("storeClients", data.data.data)
+                    commit("storeClients", data.data.data);
                 })
                 .catch(error => {
                     commit("setErrors", error.response.data);
@@ -51,7 +51,17 @@ export default {
         async destroyClient({ commit }, uuid) {
             await axios.delete(`/api/delete-client/${uuid}`)
                 .then((data) => {
-                    commit("destroyClient", uuid)
+                    commit("destroyClient", uuid);
+                })
+                .catch(error => {
+                    commit("setErrors", error.response.data);
+                })
+        },
+        async updateClient({commit}, dataObject) {
+            commit("clearErrors")
+            await axios.put(`/api/update-client/${dataObject.uuid}`, dataObject)
+                .then(data => {
+
                 })
                 .catch(error => {
                     commit("setErrors", error.response.data);
@@ -59,6 +69,6 @@ export default {
         },
         async clearErrors({ commit }) {
             commit("clearErrors");
-        }
+        },
     }
 }

@@ -67,6 +67,7 @@ class ClientController extends Controller
         if (!empty($validatorHasError)) {
             $response['data'] = $validatorHasError;
             $response['status'] = Response::HTTP_BAD_REQUEST;
+
             return response()->json($response, $response['status']);
         }
 
@@ -84,6 +85,49 @@ class ClientController extends Controller
             $data['cell_phone'] = $request->input('cell_phone');
 
             $response['data'] = $this->clientRepository->store($data);
+        } catch (\Exception $exception) {
+            $response['data'] = $exception->getMessage();
+            $response['status'] = Response::HTTP_INTERNAL_SERVER_ERROR;
+        }
+
+        return response()->json($response, $response['status']);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $uuid)
+    {
+        $response['data'] = [];
+        $response['status'] = Response::HTTP_OK;
+
+        $validatorHasError = ClientValidation::formValidate($request->all(), true);
+
+        if (!empty($validatorHasError)) {
+            $response['data'] = $validatorHasError;
+            $response['status'] = Response::HTTP_BAD_REQUEST;
+
+            return response()->json($response, $response['status']);
+        }
+
+        try {
+            $data['type'] = $request->input('type');
+            $data['name'] = $request->input('name');
+            $data['cpf_cnpj'] = $request->input('cpf_cnpj');
+            $data['city'] = $request->input('city');
+            $data['cep'] = $request->input('cep');
+            $data['district'] = $request->input('district');
+            $data['street'] = $request->input('street');
+            $data['number'] = $request->input('number');
+            $data['email'] = $request->input('email');
+            $data['phone'] = $request->input('phone');
+            $data['cell_phone'] = $request->input('cell_phone');
+
+            $response['data'] = $this->clientRepository->update($uuid, $data);
         } catch (\Exception $exception) {
             $response['data'] = $exception->getMessage();
             $response['status'] = Response::HTTP_INTERNAL_SERVER_ERROR;
