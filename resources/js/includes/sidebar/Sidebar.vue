@@ -22,11 +22,23 @@
           <DropDownSideBar
             :label="'Clientes'"
             :icon="'fas fa-address-card'"
+            :target="'item1'"
             :items="[
               { label: 'Incluir', route: 'add-client' },
               { label: 'Listar', route: 'list-client' },
             ]"
           ></DropDownSideBar>
+
+          <DropDownSideBar
+            :label="'Pagamento'"
+            :icon="'fas fa-money-check-alt'"
+            :target="'item2'"
+            :items="[
+              { label: 'Incluir', route: 'add-formpayment' },
+              { label: 'Listar', route: 'list-formpayment' },
+            ]"
+          ></DropDownSideBar>
+
         </div>
       </div>
       <div class="sb-sidenav-footer">
