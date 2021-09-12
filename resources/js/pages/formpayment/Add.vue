@@ -1,8 +1,8 @@
 <template>
   <div class="mt-3">
-    <HeadPage :title="'Incluir'" :icon="'fas fa-address-card'"></HeadPage>
+    <HeadPage :title="'Incluir'" :icon="'ffas fa-money-check-alt'"></HeadPage>
     <Breadcrumb
-      :links="[{ name: 'Clientes', route: 'list-client' }]"
+      :links="[{ name: 'Pagamento', route: 'list-formpayment' }]"
       :active="'Incluir'"
     ></Breadcrumb>
 
@@ -20,7 +20,7 @@
                     ><i class="fas fa-save"></i
                   ></a>
                   <router-link
-                    :to="{ name: 'list-client' }"
+                    :to="{ name: 'list-formpayment' }"
                     title="Cancelar"
                     class="btn c-btn btn-danger mt-1 mb-1"
                     ><i class="fas fa-window-close"></i
@@ -31,7 +31,7 @@
           </div>
           <div class="card-body">
             <form class="row g-3">
-              <div class="col-12" v-if="this.clientError.data">
+              <div class="col-12" v-if="this.formpaymentError.data">
                 <div
                   class="alert alert-danger d-flex align-items-center"
                   role="alert"
@@ -52,140 +52,17 @@
                   </svg>
                   <div>
                     <strong>Ops!</strong> <br />
-                    {{ this.clientError.data }}
+                    {{ this.formpaymentError.data }}
                   </div>
                 </div>
               </div>
-              <div class="col-12">
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="type"
-                    id="type1"
-                    v-model="form.type"
-                    value="F"
-                  />
-                  <label class="form-check-label" for="type1"
-                    >Pessoa fisica</label
-                  >
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="type"
-                    id="type2"
-                    v-model="form.type"
-                    value="J"
-                    checked
-                  />
-                  <label class="form-check-label" for="type2"
-                    >Pessoa juridica</label
-                  >
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="name" class="form-label">Nome</label>
+              <div class="col-md-12">
+                <label for="name" class="form-label">Descrição</label>
                 <input
                   type="text"
-                  v-model.trim="form.name"
+                  v-model.trim="form.description"
                   class="form-control"
-                  id="name"
-                />
-              </div>
-
-              <div class="col-md-6">
-                <label for="cpf_cnpj" class="form-label">Documento</label>
-                <input
-                  type="text"
-                  class="form-control cpfcnpj"
-                  id="cpf_cnpj"
-                  placeholder="Cpf ou cnpj"
-                  v-model.trim="form.cpf_cnpj"
-                />
-              </div>
-
-              <div class="col-md-6">
-                <label for="state" class="form-label">Estado</label>
-                <v-select
-                  v-model="form.state"
-                  @input="updateCities"
-                  :options="states"
-                ></v-select>
-              </div>
-
-              <div class="col-md-6">
-                <label for="city_id" class="form-label">Cidade</label>
-                <v-select v-model="form.city" :options="cities"></v-select>
-              </div>
-
-              <div class="col-md-2">
-                <label for="cep" class="form-label">Cep</label>
-                <input
-                  type="text"
-                  class="form-control cep"
-                  id="cep"
-                  v-model.trim="form.cep"
-                />
-              </div>
-
-              <div class="col-md-3">
-                <label for="district" class="form-label">Bairro</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="district"
-                  v-model.trim="form.district"
-                />
-              </div>
-
-              <div class="col-md-5">
-                <label for="street" class="form-label">Rua</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model.trim="form.street"
-                  id="street"
-                />
-              </div>
-
-              <div class="col-md-2">
-                <label for="number" class="form-label">Numero</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model.trim="form.number"
-                  id="number"
-                />
-              </div>
-
-              <div class="col-md-6">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  v-model.trim="form.email"
-                  id="email"
-                />
-              </div>
-
-              <div class="col-md-3">
-                <label for="phone" class="form-label">Telefone</label>
-                <input
-                  type="phone"
-                  class="form-control phone"
-                  v-model.trim="form.phone"
-                  id="phone"
-                />
-              </div>
-
-              <div class="col-md-3">
-                <label for="cell_phone" class="form-label">Celular</label>
-                <input
-                  type="phone"
-                  class="form-control cell-phone"
-                  v-model.trim="form.cell_phone"
+                  id="description"
                 />
               </div>
             </form>
@@ -217,31 +94,19 @@ export default {
   },
   computed: {
     ...mapGetters({
-      states: "fetchStates",
-      cities: "fetchCities",
-      clientError: "getClientError",
+      formpaymentError: "getClientError",
     }),
   },
   mixins: [MaskMixin],
   methods: {
     ...mapActions({
-      fetchStates: "fetchStates",
-      fetchCities: "fetchCities",
-      storeClient: "storeClient",
+      storeFormPayment: "storeFormPayment",
       clearErrors: "clearErrors",
     }),
-    updateCities: function () {
-      if (this.form.state !== null) {
-        this.fetchCities(this.form.state.id);
-      } else {
-        this.fetchCities(-1);
-        this.form.city = null;
-      }
-    },
     async formAction() {
-      await this.storeClient(this.form);
-      if (!this.clientError.data) {
-        return this.$router.push({ name: "list-client" });
+      await this.storeFormPayment(this.form);
+      if (!this.formpaymentError.data) {
+        return this.$router.push({ name: "list-formpayment" });
       }
     },
   },
@@ -250,7 +115,6 @@ export default {
   },
   created() {
     this.clearErrors();
-    this.fetchStates();
   },
 };
 </script>

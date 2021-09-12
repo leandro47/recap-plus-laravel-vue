@@ -16,7 +16,7 @@ export default {
         clearErrors: (state) => state.errors = { data: null, status: null },
         fetchFormPayments: (state, data) => state.formPayments = data,
         fetchFormPayment: (state, data) => state.formPayment = data,
-        storeFormPayments: (state, data) => state.formPayments.data.unshift(data),
+        storeFormPayment: (state, data) => state.formPayments.data.unshift(data),
         destroyFormPayment: (state, uuid) => {
             const index = state.formPayments.data.findIndex(formPayment => formPayment.uuid === uuid)
 
@@ -47,7 +47,8 @@ export default {
             await axios.post(`/api/store-formpayment/`, dataObject)
                 .then(data => {
                     toastr["success"]("Registro Incluido", "Aviso do Sistema");
-                    commit("storeFormPayments", data.data.data);
+                    debugger;
+                    commit("storeFormPayment", data.data.data);
                 })
                 .catch(error => {
                     commit("setErrors", error.response.data);
