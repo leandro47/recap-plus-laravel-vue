@@ -62,6 +62,7 @@
                     class="form-check-input"
                     type="radio"
                     name="type"
+                    @change="clearErrors"
                     id="type1"
                     v-model="form.type"
                     value="F"
@@ -75,6 +76,7 @@
                     class="form-check-input"
                     type="radio"
                     name="type"
+                    @change="clearErrors"
                     id="type2"
                     v-model="form.type"
                     value="J"
@@ -90,6 +92,7 @@
                 <input
                   type="text"
                   v-model.trim="form.name"
+                  @change="clearErrors"
                   class="form-control"
                   id="name"
                 />
@@ -98,6 +101,7 @@
               <div class="col-md-4">
                 <label for="cpf_cnpj" class="form-label">Documento</label>
                 <input
+                  @change="clearErrors"
                   type="text"
                   class="form-control cpfcnpj"
                   id="cpf_cnpj"
@@ -127,6 +131,7 @@
                   class="form-control cep"
                   id="cep"
                   v-model.trim="form.cep"
+                  @change="clearErrors"
                 />
               </div>
 
@@ -135,6 +140,7 @@
                 <input
                   type="text"
                   class="form-control"
+                  @change="clearErrors"
                   id="district"
                   v-model.trim="form.district"
                 />
@@ -145,6 +151,7 @@
                 <input
                   type="text"
                   class="form-control"
+                  @change="clearErrors"
                   v-model.trim="form.street"
                   id="street"
                 />
@@ -155,6 +162,7 @@
                 <input
                   type="number"
                   class="form-control"
+                  @change="clearErrors"
                   v-model.trim="form.number"
                   id="number"
                 />
@@ -165,6 +173,7 @@
                 <input
                   type="email"
                   class="form-control"
+                  @change="clearErrors"
                   v-model.trim="form.email"
                   id="email"
                 />
@@ -176,6 +185,7 @@
                   type="phone"
                   class="form-control phone"
                   v-model.trim="form.phone"
+                  @change="clearErrors"
                   id="phone"
                 />
               </div>
@@ -184,6 +194,7 @@
                 <label for="cell_phone" class="form-label">Celular</label>
                 <input
                   type="phone"
+                  @change="clearErrors"
                   class="form-control cell-phone"
                   v-model.trim="form.cell_phone"
                 />
@@ -235,6 +246,7 @@ export default {
       fetchCity: "fetchCity",
     }),
     async updateCities() {
+      this.clearErrors();
       this.form.city = null;
       if (this.form.state != null) {
         await this.fetchCities(this.form.state.id);

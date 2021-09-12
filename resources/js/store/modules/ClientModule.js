@@ -71,7 +71,6 @@ export default {
                     toastr["info"]("Registro atualizado", "Aviso do Sistema");
                 })
                 .catch(error => {
-                    toastr["error"](error.response.data, "Aviso do Sistema")
                     commit("setErrors", error.response.data);
                 })
         },
