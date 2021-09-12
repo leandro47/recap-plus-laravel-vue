@@ -68,7 +68,7 @@
                     <th class="fw-normal">CPF/CNPJ</th>
                     <th class="fw-normal">Cidade</th>
                     <th class="fw-normal">Email</th>
-                    <th class="fw-normal">Ações</th>
+                    <th class="fw-normal text-center">Ações</th>
                   </tr>
                 </thead>
                 <tbody v-for="client in clients.data" :key="client.id">
@@ -78,7 +78,7 @@
                     <td>{{ client.cpf_cnpj }}</td>
                     <td>{{ client.city.name }}</td>
                     <td>{{ client.email }}</td>
-                    <td>
+                    <td class="text-center">
                       <div class="btn-group btn-group-sm">
                         <router-link
                           class="btn btn-sm text-warning"

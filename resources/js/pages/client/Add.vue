@@ -85,7 +85,7 @@
                   >
                 </div>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <label for="name" class="form-label">Nome</label>
                 <input
                   type="text"
@@ -95,7 +95,7 @@
                 />
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="cpf_cnpj" class="form-label">Documento</label>
                 <input
                   type="text"
@@ -106,7 +106,7 @@
                 />
               </div>
 
-              <div class="col-md-3">
+              <div class="col-md-6">
                 <label for="state" class="form-label">Estado</label>
                 <v-select
                   v-model="form.state"
@@ -115,7 +115,7 @@
                 ></v-select>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-6">
                 <label for="city_id" class="form-label">Cidade</label>
                 <v-select v-model="form.city" :options="cities"></v-select>
               </div>
@@ -130,7 +130,7 @@
                 />
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label for="district" class="form-label">Bairro</label>
                 <input
                   type="text"
@@ -150,7 +150,7 @@
                 />
               </div>
 
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <label for="number" class="form-label">Numero</label>
                 <input
                   type="number"
