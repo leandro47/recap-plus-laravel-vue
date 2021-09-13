@@ -59,6 +59,7 @@
               <EnableDisable
                 :function="changeStatus"
                 :enable="form.enable"
+                :loading="loading"
               ></EnableDisable>
               <div class="col-md-12">
                 <label for="name" class="form-label">Descrição</label>
@@ -90,8 +91,8 @@ export default {
   data() {
     return {
       form: {
-        enable: 'Y'
       },
+      loading: true
     };
   },
   components: {

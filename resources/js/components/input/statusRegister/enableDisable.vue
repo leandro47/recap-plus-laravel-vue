@@ -1,8 +1,8 @@
 <template>
   <div class="col-md-2 col-sm-6 col-xl-1 center con-switch">
-    <vs-switch @change="newStatus" v-model="status">
-      <template #off> <i class="fas fa-lock"></i> &nbsp; inativo </template>
-      <template #on> <i class="fas fa-lock-open"></i> &nbsp; ativo </template>
+    <vs-switch @change="newStatus" :loading="loading" v-model="status">
+      <template #off v-if="!loading"> <i class="fas fa-lock"></i> &nbsp; inativo </template>
+      <template #on v-if="!loading"> <i class="fas fa-lock-open"></i> &nbsp; ativo </template>
     </vs-switch>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      status: null
+      status: null,
     }
   },
   props: {
@@ -23,6 +23,10 @@ export default {
       type: Function,
       required: true,
     },
+    loading: {
+      typeof: Boolean,
+      required: true,
+    }
   },
   methods: {
     newStatus() {
