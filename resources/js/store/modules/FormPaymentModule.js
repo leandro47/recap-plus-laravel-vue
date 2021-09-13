@@ -47,7 +47,6 @@ export default {
             await axios.post(`/api/store-formpayment/`, dataObject)
                 .then(data => {
                     toastr["success"]("Registro Incluido", "Aviso do Sistema");
-                    debugger;
                     commit("storeFormPayment", data.data.data);
                 })
                 .catch(error => {

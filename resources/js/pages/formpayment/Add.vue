@@ -77,7 +77,6 @@
 import { mapGetters, mapActions } from "vuex";
 import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
 import HeadPage from "./../../components/headpage/HeadPage";
-import vSelect from "vue-select";
 import MaskMixin from "./../../mixins/MaskMixin";
 import "vue-select/dist/vue-select.css";
 
@@ -89,8 +88,7 @@ export default {
   },
   components: {
     Breadcrumb,
-    HeadPage,
-    vSelect,
+    HeadPage
   },
   computed: {
     ...mapGetters({

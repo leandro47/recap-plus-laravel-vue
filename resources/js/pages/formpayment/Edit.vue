@@ -1,8 +1,8 @@
 <template>
   <div class="mt-3">
-    <HeadPage :title="'Editar'" :icon="'fas fa-address-card'"></HeadPage>
+    <HeadPage :title="'Editar'" :icon="'ffas fa-money-check-alt'"></HeadPage>
     <Breadcrumb
-      :links="[{ name: 'Clientes', route: 'list-client' }]"
+      :links="[{ name: 'Pagamento', route: 'list-formpayment' }]"
       :active="'Editar'"
     ></Breadcrumb>
 
@@ -20,7 +20,7 @@
                     ><i class="fas fa-save"></i
                   ></a>
                   <router-link
-                    :to="{ name: 'list-client' }"
+                    :to="{ name: 'list-formpayment' }"
                     title="Cancelar"
                     class="btn c-btn btn-danger mt-1 mb-1"
                     ><i class="fas fa-window-close"></i
@@ -30,8 +30,8 @@
             </div>
           </div>
           <div class="card-body">
-            <form class="row g-3">
-              <div class="col-12" v-if="this.clientError.data">
+            <div class="row g-3">
+              <div class="col-12" v-if="this.formPaymentError.data">
                 <div
                   class="alert alert-danger d-flex align-items-center"
                   role="alert"
@@ -52,154 +52,21 @@
                   </svg>
                   <div>
                     <strong>Ops!</strong> <br />
-                    {{ this.clientError.data }}
+                    {{ this.formPaymentError.data }}
                   </div>
                 </div>
               </div>
-              <div class="col-12">
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="type"
-                    @change="clearErrors"
-                    id="type1"
-                    v-model="form.type"
-                    value="F"
-                  />
-                  <label class="form-check-label" for="type1"
-                    >Pessoa fisica</label
-                  >
-                </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="type"
-                    @change="clearErrors"
-                    id="type2"
-                    v-model="form.type"
-                    value="J"
-                    checked
-                  />
-                  <label class="form-check-label" for="type2"
-                    >Pessoa juridica</label
-                  >
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="name" class="form-label">Nome</label>
+              <div class="col-md-12">
+                <label for="name" class="form-label">Descrição</label>
                 <input
                   type="text"
-                  v-model.trim="form.name"
                   @change="clearErrors"
+                  v-model.trim="form.description"
                   class="form-control"
-                  id="name"
+                  id="description"
                 />
               </div>
-
-              <div class="col-md-6">
-                <label for="cpf_cnpj" class="form-label">Documento</label>
-                <input
-                  @change="clearErrors"
-                  type="text"
-                  class="form-control cpfcnpj"
-                  id="cpf_cnpj"
-                  placeholder="Cpf ou cnpj"
-                  v-model.trim="form.cpf_cnpj"
-                />
-              </div>
-
-              <div class="col-md-6">
-                <label for="state" class="form-label">Estado</label>
-                <v-select
-                  v-model="form.state"
-                  @input="updateCities"
-                  :options="states"
-                ></v-select>
-              </div>
-
-              <div class="col-md-6">
-                <label for="city_id" class="form-label">Cidade</label>
-                <v-select v-model="form.city"  @input="clearErrors" :options="cities"></v-select>
-              </div>
-
-              <div class="col-md-2">
-                <label for="cep" class="form-label">Cep</label>
-                <input
-                  type="text"
-                  class="form-control cep"
-                  id="cep"
-                  v-model.trim="form.cep"
-                  @change="clearErrors"
-                />
-              </div>
-
-              <div class="col-md-3">
-                <label for="district" class="form-label">Bairro</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  @change="clearErrors"
-                  id="district"
-                  v-model.trim="form.district"
-                />
-              </div>
-
-              <div class="col-md-5">
-                <label for="street" class="form-label">Rua</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  @change="clearErrors"
-                  v-model.trim="form.street"
-                  id="street"
-                />
-              </div>
-
-              <div class="col-md-2">
-                <label for="number" class="form-label">Numero</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  @change="clearErrors"
-                  v-model.trim="form.number"
-                  id="number"
-                />
-              </div>
-
-              <div class="col-md-6">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  @change="clearErrors"
-                  v-model.trim="form.email"
-                  id="email"
-                />
-              </div>
-
-              <div class="col-md-3">
-                <label for="phone" class="form-label">Telefone</label>
-                <input
-                  type="phone"
-                  class="form-control phone"
-                  v-model.trim="form.phone"
-                  @change="clearErrors"
-                  id="phone"
-                />
-              </div>
-
-              <div class="col-md-3">
-                <label for="cell_phone" class="form-label">Celular</label>
-                <input
-                  type="phone"
-                  @change="clearErrors"
-                  class="form-control cell-phone"
-                  v-model.trim="form.cell_phone"
-                />
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -211,7 +78,6 @@
 import { mapGetters, mapActions } from "vuex";
 import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
 import HeadPage from "./../../components/headpage/HeadPage";
-import vSelect from "vue-select";
 import MaskMixin from "./../../mixins/MaskMixin";
 import "vue-select/dist/vue-select.css";
 
@@ -223,49 +89,29 @@ export default {
   },
   components: {
     Breadcrumb,
-    HeadPage,
-    vSelect,
+    HeadPage
   },
   computed: {
     ...mapGetters({
-      states: "fetchStates",
-      cities: "fetchCities",
-      clientError: "getClientError",
-      client: "getClient",
-      city: "fetchCity",
+      formPaymentError: "getFormPaymentError",
+      formPayment: "getFormPayment"
     }),
   },
   mixins: [MaskMixin],
   methods: {
     ...mapActions({
-      fetchStates: "fetchStates",
-      fetchCities: "fetchCities",
-      updateClient: "updateClient",
+      updateFormPayment: "updateFormPayment",
       clearErrors: "clearErrors",
-      fetchClient: "fetchClient",
-      fetchCity: "fetchCity",
+      fetchFormPayment: "fetchFormPayment",
     }),
-    async updateCities() {
-      this.clearErrors();
-      this.form.city = null;
-      if (this.form.state != null) {
-        await this.fetchCities(this.form.state.id);
-      } else {
-        await this.fetchCities(-1);
-      }
-    },
-    async editclient(uuid) {
-      await this.fetchClient(uuid);
-      await this.fetchCity(this.client.city_id);
-      this.form = this.client;
-      this.form.state = this.city.state;
-      this.updateCities();
-      this.form.city = this.city.city;
+    async editformPayment(uuid) {
+      await this.fetchFormPayment(uuid);
+      this.form = this.formPayment;
     },
     async formAction() {
-      await this.updateClient(this.form);
-      if (!this.clientError.data) {
-        return this.$router.push({ name: "list-client" });
+      await this.updateFormPayment(this.form);
+      if (!this.formPaymentError.data) {
+        return this.$router.push({ name: "list-formpayment" });
       }
     },
   },
@@ -274,8 +120,7 @@ export default {
   },
   created() {
     this.clearErrors();
-    this.fetchStates();
-    this.editclient(this.$route.query.uuid);
+    this.editformPayment(this.$route.query.uuid);
   },
 };
 </script>
