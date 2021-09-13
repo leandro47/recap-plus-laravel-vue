@@ -11,8 +11,11 @@ import App from './layouts/App.vue';
 import VueAxios from 'vue-axios';
 import vSelect from "vue-select";
 import VueSimpleAlert from "vue-simple-alert";
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css'
 
 Vue.use(VueSimpleAlert);
+Vue.use(Vuesax, {})
 
 const app = new Vue({
     router,

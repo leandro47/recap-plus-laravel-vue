@@ -56,6 +56,10 @@
                   </div>
                 </div>
               </div>
+              <EnableDisable
+                :function="changeStatus"
+                :enable="form.enable"
+              ></EnableDisable>
               <div class="col-md-12">
                 <label for="name" class="form-label">Descrição</label>
                 <input
@@ -80,21 +84,25 @@ import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
 import HeadPage from "./../../components/headpage/HeadPage";
 import MaskMixin from "./../../mixins/MaskMixin";
 import "vue-select/dist/vue-select.css";
+import EnableDisable from "../../components/input/statusRegister/enableDisable";
 
 export default {
   data() {
     return {
-      form: {}
+      form: {
+        enable: 'Y'
+      },
     };
   },
   components: {
     Breadcrumb,
-    HeadPage
+    HeadPage,
+    EnableDisable,
   },
   computed: {
     ...mapGetters({
       formPaymentError: "getFormPaymentError",
-      formPayment: "getFormPayment"
+      formPayment: "getFormPayment",
     }),
   },
   mixins: [MaskMixin],
@@ -107,6 +115,9 @@ export default {
     async editformPayment(uuid) {
       await this.fetchFormPayment(uuid);
       this.form = this.formPayment;
+    },
+    async changeStatus(vlr) {
+      this.form.enable = vlr;
     },
     async formAction() {
       await this.updateFormPayment(this.form);
