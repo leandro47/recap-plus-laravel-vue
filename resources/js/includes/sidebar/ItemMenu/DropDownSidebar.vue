@@ -4,7 +4,7 @@
       class="nav-link c-sidebar-item collapsed"
       href="#"
       data-bs-toggle="collapse"
-      data-bs-target="#collapseLayouts"
+      :data-bs-target="`#${target}`"
       aria-expanded="false"
       aria-controls="collapseLayouts"
     >
@@ -16,7 +16,7 @@
     </a>
     <div
       class="collapse"
-      id="collapseLayouts"
+      :id="target"
       aria-labelledby="headingOne"
       data-bs-parent="#sidenavAccordion"
     >
@@ -25,8 +25,8 @@
           v-for="item in items"
           :key="item.route"
           class="nav-link"
-          :to="{name: item.route}"
-          >{{item.label}}</router-link
+          :to="{ name: item.route }"
+          >{{ item.label }}</router-link
         >
       </nav>
     </div>
@@ -42,6 +42,10 @@ export default {
       required: true,
     },
     icon: {
+      type: String,
+      required: true,
+    },
+    target: {
       type: String,
       required: true,
     },

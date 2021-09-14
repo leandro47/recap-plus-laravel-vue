@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             ClientSeeder::class,
             UserSeeder::class,
+            FormPaymentSeeder::class,
         ]);
     }
 }
