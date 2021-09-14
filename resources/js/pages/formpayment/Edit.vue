@@ -56,11 +56,19 @@
                   </div>
                 </div>
               </div>
-              <EnableDisable
-                :function="changeStatus"
-                :enable="form.enable"
-                :loading="loading"
-              ></EnableDisable>
+              <div class="col-md-2 col-sm-6 col-xl-1 center con-switch">
+                <vs-switch
+                  @change="changeStatus"
+                  v-model="status"
+                >
+                  <template #off>
+                    <i class="fas fa-lock"></i> &nbsp; inativo
+                  </template>
+                  <template #on>
+                    <i class="fas fa-lock-open"></i> &nbsp; ativo
+                  </template>
+                </vs-switch>
+              </div>
               <div class="col-md-12">
                 <label for="name" class="form-label">Descrição</label>
                 <input
@@ -85,20 +93,17 @@ import Breadcrumb from "./../../components/breadcrumb/Breadcrumb";
 import HeadPage from "./../../components/headpage/HeadPage";
 import MaskMixin from "./../../mixins/MaskMixin";
 import "vue-select/dist/vue-select.css";
-import EnableDisable from "../../components/input/statusRegister/enableDisable";
 
 export default {
   data() {
     return {
-      form: {
-      },
-      loading: true
+      form: {},
+      status: null,
     };
   },
   components: {
     Breadcrumb,
     HeadPage,
-    EnableDisable,
   },
   computed: {
     ...mapGetters({
@@ -116,9 +121,10 @@ export default {
     async editformPayment(uuid) {
       await this.fetchFormPayment(uuid);
       this.form = this.formPayment;
+      this.status = this.form.enable == 'Y' ? true : false;
     },
-    async changeStatus(vlr) {
-      this.form.enable = vlr;
+    async changeStatus() {
+      this.form.enable = this.status == true ? 'Y' : 'N';
     },
     async formAction() {
       await this.updateFormPayment(this.form);

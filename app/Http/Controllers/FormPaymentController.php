@@ -106,6 +106,7 @@ class FormPaymentController extends Controller
 
         try {
             $data['description'] = $request->input('description');
+            $data['enable'] = $request->input('enable');
 
             $response['data'] = $this->repository->update($uuid, $data);
         } catch (\Exception $exception) {

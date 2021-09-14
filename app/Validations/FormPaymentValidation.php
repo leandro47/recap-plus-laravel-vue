@@ -13,6 +13,10 @@ class FormPaymentValidation extends AbstractValidation implements ValidateInterf
             'description' => 'required|unique:form_payments',
         ];
 
+        if ($isUpdate) {
+            $rules = ['description' => 'required'];
+        }
+
         $messages = [
             'description.required' => 'Descrição não preenchida',
             'description.unique' => 'Já existe uma descrição igual essa!',

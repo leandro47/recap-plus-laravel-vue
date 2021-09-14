@@ -48,6 +48,7 @@ class FormPaymentRepository implements RepositoryInterface
         ])->first();
 
         $formPayment->description = $data['description'];
+        $formPayment->enable = $data['enable'];
 
         if (!$formPayment->update()) {
             throw new \Exception('Registro não atualizado');
