@@ -9,6 +9,9 @@ import NotFound from './pages/response/NotFound';
 import AddClient from './pages/client/Add';
 import EditClient from './pages/client/Edit';
 import ListClient from './pages/client/List';
+import AddFormPayment from './pages/formpayment/Add';
+import EditFormPayment from './pages/formpayment/Edit';
+import ListFormPayment from './pages/formpayment/List';
 
 Vue.use(VueRouter);
 
@@ -72,6 +75,24 @@ const router = new VueRouter({
             path: "/edit-client",
             name: "edit-client",
             component: EditClient,
+            beforeEnter: auth
+        },
+        {
+            path: "/add-formpayment",
+            name: "add-formpayment",
+            component: AddFormPayment,
+            beforeEnter: auth
+        },
+        {
+            path: "/list-formpayment",
+            name: "list-formpayment",
+            component: ListFormPayment,
+            beforeEnter: auth
+        },
+        {
+            path: "/edit-formpayment",
+            name: "edit-formpayment",
+            component: EditFormPayment,
             beforeEnter: auth
         },
         {
