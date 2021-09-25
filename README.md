@@ -41,4 +41,9 @@ Visit `http://127.0.0.1:8000/login`
 Login: **admin@admin.com**
 Password: **password**
 
-#### See me running in `https://recapplus.leandro47.com`
+#### See me running
+
+ `https://recapplus.leandro47.com`
+ 
+Login: **admin@admin.com**
+Password: **password**
